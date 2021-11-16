@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class ChangeLife : MonoBehaviour
 {
     [SerializeField] private Transform _target;
-    [SerializeField] private Transform _a;
-    [SerializeField] private Transform _b;
     [SerializeField] private Button _extensionLife;
     [SerializeField] private Button _shrinkingLife;
     [SerializeField] private Text _textLife;
@@ -16,7 +14,7 @@ public class ChangeLife : MonoBehaviour
 
     public void SetNormalizedPosition(float position)
     {
-        _target.position = Vector3.Lerp(_a.position, _b.position, position);
+        _target.position = Vector3.Lerp(_extensionLife.position, _shrinkingLife.position, position);
     }
 
     private void Update()
@@ -32,11 +30,11 @@ public class ChangeLife : MonoBehaviour
 
     private void ExtensionLife()
     {
-        _target.position = Vector3.Lerp(_a.position, _b.position, _life += _difference);
+        _target.position = Vector3.Lerp(_extensionLife.position, _shrinkingLife.position, _life += _difference);
     }
 
     private void ShrinkingLife()
     {
-        _target.position = Vector3.Lerp(_a.position, _b.position, _life -= _difference);
+        _target.position = Vector3.Lerp(_extensionLife.position, _shrinkingLife.position, _life -= _difference);
     }
 }
