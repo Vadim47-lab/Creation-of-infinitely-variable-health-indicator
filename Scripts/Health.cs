@@ -13,11 +13,11 @@ public class Health : MonoBehaviour
     [SerializeField] private float _life = 100;
     [SerializeField] private int _difference = 10;
 
-    private readonly Display _display;
+    private readonly HealthBar _healthBar;
 
     private void Update()
     {
-        _display.Update(_textLife, _life);
+        _healthBar.DisplayHealthBar(_life);
     }
 
     private void Start()
@@ -53,10 +53,13 @@ public class Health : MonoBehaviour
     }
 }
 
-public class Display
+public class HealthBar
 {
-    public void Update(Text _textLife, float _life)
+    [SerializeField] private Text _textLife;
+
+    public void DisplayHealthBar(float _life)
     {
         _textLife.text = "Количество жизни = " + _life;
+        Debug.Log("Вывод количество жизни");
     }
 }
