@@ -14,15 +14,12 @@ public class Health : MonoBehaviour
     [SerializeField] private float _life = 100;
     [SerializeField] private int _difference = 10;
 
-    readonly HealthBar _healthBar;
-
-    private void Update()
-    {
-        _healthBar.DisplayHealthBar(_life);
-    }
+    private HealthBar _healthBar;
 
     private void Start()
     {
+        _healthBar = new HealthBar();
+
         _extensionLife.onClick.AddListener(Increase);
         _shrinkingLife.onClick.AddListener(Decrease);
     }
@@ -38,7 +35,7 @@ public class Health : MonoBehaviour
             _slider.value = _life;
         }
 
-        Debug.Log("_Life + = " + _life);
+        _healthBar.DisplayHealthBar(_textLife, _life);
     }
 
     private void Decrease()
@@ -52,17 +49,14 @@ public class Health : MonoBehaviour
             _slider.value = _life;
         }
 
-        Debug.Log("_Life - = " + _life);
+        _healthBar.DisplayHealthBar(_textLife, _life);
     }
-}
 
-public class HealthBar
-{
-    [SerializeField] private Text _textLife;
-
-    public void DisplayHealthBar(float _life)
+    public class HealthBar
     {
-        _textLife.text = "Количество жизни = " + _life;
-        Debug.Log("Вывод количество жизни");
+        public void DisplayHealthBar(Text _textLife, float _life)
+        {
+            _textLife.text = "Количество жизни = " + _life;
+        }
     }
 }
