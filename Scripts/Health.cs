@@ -5,15 +5,16 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] private Slider _slider;
     [SerializeField] private Button _extensionLife;
     [SerializeField] private Button _shrinkingLife;
     [SerializeField] private Text _textLife;
-    [SerializeField] private float _minStrength;
-    [SerializeField] private float _maxStrength;
+    [SerializeField] private float _minLife;
+    [SerializeField] private float _maxLife;
     [SerializeField] private float _life = 100;
     [SerializeField] private int _difference = 10;
 
-    private readonly HealthBar _healthBar;
+    [SerializeField] private readonly HealthBar _healthBar;
 
     private void Update()
     {
@@ -22,31 +23,35 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        _extensionLife.onClick.AddListener(ExtensionLife);
-        _shrinkingLife.onClick.AddListener(ShrinkingLife);
+        _extensionLife.onClick.AddListener(Increase);
+        _shrinkingLife.onClick.AddListener(Decrease);
     }
 
-    private void ExtensionLife()
+    private void Increase()
     {
         //_life = Mathf.MoveTowards(_maxStrength, _currentStrength, _life += _difference);
 
-        _life = Mathf.MoveTowards(_life, _maxStrength, _difference);
+        _life = Mathf.MoveTowards(_life, _maxLife, _difference);
+        _slider.value = _life;
 
-        if (_life > 100)
+        if (_life > _maxLife)
         {
-            _life = _maxStrength;
+            _life = _maxLife;
+            _slider.value = _life;
         }
 
         Debug.Log("_Life + = " + _life);
     }
 
-    private void ShrinkingLife()
+    private void Decrease()
     {
-        _life = Mathf.MoveTowards(_life, _minStrength, _difference);
+        _life = Mathf.MoveTowards(_life, _minLife, _difference);
+        _slider.value = _life;
 
         if (_life < 0)
         {
             _life += _difference;
+            _slider.value = _life;
         }
 
         Debug.Log("_Life - = " + _life);
