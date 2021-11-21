@@ -14,7 +14,7 @@ public class Health : MonoBehaviour
     [SerializeField] private float _life = 100;
     [SerializeField] private int _difference = 10;
 
-    [SerializeField] private readonly HealthBar _healthBar;
+    readonly HealthBar _healthBar;
 
     private void Update()
     {
@@ -29,8 +29,6 @@ public class Health : MonoBehaviour
 
     private void Increase()
     {
-        //_life = Mathf.MoveTowards(_maxStrength, _currentStrength, _life += _difference);
-
         _life = Mathf.MoveTowards(_life, _maxLife, _difference);
         _slider.value = _life;
 
