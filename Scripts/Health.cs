@@ -43,7 +43,7 @@ public class Health : MonoBehaviour
         _life = Mathf.MoveTowards(_life, _minLife, _difference);
         _slider.value = _life;
 
-        if (_life < 0)
+        if (_life < _minLife)
         {
             _life += _difference;
             _slider.value = _life;
