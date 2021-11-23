@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        _healthBar = new HealthBar();
+        _healthBar = gameObject.AddComponent<HealthBar>();
 
         _extensionLife.onClick.AddListener(Increase);
         _shrinkingLife.onClick.AddListener(Decrease);
@@ -50,13 +50,5 @@ public class Health : MonoBehaviour
         }
 
         _healthBar.DisplayHealthBar(_textLife, _life);
-    }
-
-    public class HealthBar
-    {
-        public void DisplayHealthBar(Text _textLife, float _life)
-        {
-            _textLife.text = "Количество жизни = " + _life;
-        }
     }
 }
