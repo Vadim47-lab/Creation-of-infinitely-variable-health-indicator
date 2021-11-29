@@ -49,7 +49,7 @@ public class Health : MonoBehaviour
     {
         _slider.value = _health;
 
-        _health = Mathf.MoveTowards(_health, _maxHealth, _health + _difference);
+        StartCoroutine(CoroutineIncreaseHealth());
 
         if (_health > _maxHealth)
         {
@@ -62,12 +62,30 @@ public class Health : MonoBehaviour
     {
         _slider.value = _health;
 
-        _health = Mathf.MoveTowards(_health, _minHealth, _health - _difference);
+        StartCoroutine(CoroutineDecreaseVolume());
 
         if (_health < _minHealth)
         {
             _health += _difference;
             _slider.value = _health;
         }
+    }
+
+    private IEnumerator CoroutineIncreaseHealth()
+    {
+        var waitForOneSeconds = new WaitForSeconds(1f);
+
+        _health = Mathf.MoveTowards(_health, _maxHealth, _health + _difference);
+
+        yield return waitForOneSeconds;
+    }
+
+    private IEnumerator CoroutineDecreaseVolume()
+    {
+        var waitForOneSeconds = new WaitForSeconds(1f);
+
+        _health = Mathf.MoveTowards(_health, _minHealth, _health - _difference);
+
+        yield return waitForOneSeconds;
     }
 }
