@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private UnityAction _display;
+    [SerializeField] private UnityAction _change;
+    [SerializeField] private UnityAction _increase;
+    [SerializeField] private UnityAction _decrease;
     [SerializeField] private Slider _slider;
     [SerializeField] private Button _extension;
     [SerializeField] private Button _shrinking;
@@ -29,11 +31,11 @@ public class Health : MonoBehaviour
 
     private void Increase()
     {
-        _display.Invoke();
+        _change.Invoke();
 
         _slider.value = _health;
 
-        StartCoroutine(IncreaseHealth());
+        _increase.Invoke();
 
         if (_health > _maxHealth)
         {
@@ -44,40 +46,16 @@ public class Health : MonoBehaviour
 
     private void Decrease()
     {
-        _display.Invoke();
+        _change.Invoke();
 
         _slider.value = _health;
 
-        StartCoroutine(DecreaseVolume());
+        _decrease.Invoke();
 
         if (_health < _minHealth)
         {
             _health += _difference;
             _slider.value = _health;
-        }
-    }
-
-    private IEnumerator IncreaseHealth()
-    {
-        var waitForOneSeconds = new WaitForSeconds(1f);
-
-        while (_health != _difference)
-        {
-            _health = Mathf.MoveTowards(_health, _maxHealth, _health + _difference);
-
-            yield return waitForOneSeconds;
-        }
-    }
-
-    private IEnumerator DecreaseVolume()
-    {
-        var waitForOneSeconds = new WaitForSeconds(1f);
-
-        while (_health != _difference)
-        {
-            _health = Mathf.MoveTowards(_health, _minHealth, _health - _difference);
-
-            yield return waitForOneSeconds;
         }
     }
 }
