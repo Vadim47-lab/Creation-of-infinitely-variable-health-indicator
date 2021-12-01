@@ -6,50 +6,34 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] private UnityAction _display;
     [SerializeField] private Slider _slider;
-    [SerializeField] private Button _extensionHealth;
-    [SerializeField] private Button _shrinkingHealth;
+    [SerializeField] private Button _extension;
+    [SerializeField] private Button _shrinking;
     [SerializeField] private float _health = 100;
     [SerializeField] private float _minHealth;
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
 
-    private SliderBar _sliderBar;
-
-    private void Start()
-    {
-        _sliderBar = gameObject.AddComponent<SliderBar>();
-    }
-
     private void OnEnable()
     {
-        _extensionHealth.onClick.AddListener(Increase);
-        _shrinkingHealth.onClick.AddListener(Decrease);
+        _extension.onClick.AddListener(Increase);
+        _shrinking.onClick.AddListener(Decrease);
     }
 
     private void OnDisable()
     {
-        _extensionHealth.onClick.AddListener(Increase);
-        _shrinkingHealth.onClick.AddListener(Decrease);
+        _extension.onClick.AddListener(Increase);
+        _shrinking.onClick.AddListener(Decrease);
     }
 
     private void Increase()
     {
-        _sliderBar.DisplayHealthBar(_health);
-        IncreaseHealth();
-    }
+        _display.Invoke();
 
-    private void Decrease()
-    {
-        _sliderBar.DisplayHealthBar(_health);
-        DecreaseHealth();
-    }
-
-    public void IncreaseHealth()
-    {
         _slider.value = _health;
 
-        StartCoroutine(CoroutineIncreaseHealth());
+        StartCoroutine(IncreaseHealth());
 
         if (_health > _maxHealth)
         {
@@ -58,11 +42,13 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void DecreaseHealth()
+    private void Decrease()
     {
+        _display.Invoke();
+
         _slider.value = _health;
 
-        StartCoroutine(CoroutineDecreaseVolume());
+        StartCoroutine(DecreaseVolume());
 
         if (_health < _minHealth)
         {
@@ -71,21 +57,27 @@ public class Health : MonoBehaviour
         }
     }
 
-    private IEnumerator CoroutineIncreaseHealth()
+    private IEnumerator IncreaseHealth()
     {
         var waitForOneSeconds = new WaitForSeconds(1f);
 
-        _health = Mathf.MoveTowards(_health, _maxHealth, _health + _difference);
+        while (_health != _difference)
+        {
+            _health = Mathf.MoveTowards(_health, _maxHealth, _health + _difference);
 
-        yield return waitForOneSeconds;
+            yield return waitForOneSeconds;
+        }
     }
 
-    private IEnumerator CoroutineDecreaseVolume()
+    private IEnumerator DecreaseVolume()
     {
         var waitForOneSeconds = new WaitForSeconds(1f);
 
-        _health = Mathf.MoveTowards(_health, _minHealth, _health - _difference);
+        while (_health != _difference)
+        {
+            _health = Mathf.MoveTowards(_health, _minHealth, _health - _difference);
 
-        yield return waitForOneSeconds;
+            yield return waitForOneSeconds;
+        }
     }
 }
