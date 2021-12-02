@@ -13,6 +13,8 @@ public class HealthBar : MonoBehaviour
 
     public void DisplayHealthBar(float _health)
     {
+        _slider.value = _health;
+
         _textHealth.text = "Количество жизни = " + _health;
     }
 
