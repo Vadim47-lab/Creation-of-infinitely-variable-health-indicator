@@ -10,26 +10,12 @@ public class Health : MonoBehaviour
     [SerializeField] private UnityAction _increase;
     [SerializeField] private UnityAction _decrease;
     [SerializeField] private Slider _slider;
-    [SerializeField] private Button _extension;
-    [SerializeField] private Button _shrinking;
     [SerializeField] private float _health = 100;
     [SerializeField] private float _minHealth;
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
 
-    private void OnEnable()
-    {
-        _extension.onClick.AddListener(Increase);
-        _shrinking.onClick.AddListener(Decrease);
-    }
-
-    private void OnDisable()
-    {
-        _extension.onClick.AddListener(Increase);
-        _shrinking.onClick.AddListener(Decrease);
-    }
-
-    private void Increase()
+    public void Increase()
     {
         _change.Invoke();
 
@@ -44,7 +30,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    private void Decrease()
+    public void Decrease()
     {
         _change.Invoke();
 
