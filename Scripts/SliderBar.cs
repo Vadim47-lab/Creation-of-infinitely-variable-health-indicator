@@ -14,7 +14,7 @@ public class SliderBar : MonoBehaviour
         _textHealth.text = "Количество жизни = " + _health;
     }
 
-    private IEnumerator IncreaseHealth(float _health, float _maxHealth)
+    public IEnumerator IncreaseHealth(float _health, float _maxHealth)
     {
         var waitForOneSeconds = new WaitForSeconds(1f);
 
@@ -26,7 +26,7 @@ public class SliderBar : MonoBehaviour
         }
     }
 
-    private IEnumerator DecreaseVolume(float _health, float _minHealth)
+    public IEnumerator DecreaseVolume(float _health, float _minHealth)
     {
         var waitForOneSeconds = new WaitForSeconds(1f);
 
