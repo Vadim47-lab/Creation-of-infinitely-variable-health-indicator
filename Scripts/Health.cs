@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private UnityEvent _decrease;
-    [SerializeField] private UnityEvent _increase;
+    [SerializeField] private UnityEvent _change;
     [SerializeField] private float _health = 100;
     [SerializeField] private float _minHealth;
     [SerializeField] private float _maxHealth;
@@ -15,7 +14,7 @@ public class Health : MonoBehaviour
 
     public void Increase()
     {
-        _increase.Invoke();
+        _change.Invoke();
 
         if (_health > _maxHealth)
         {
@@ -25,7 +24,7 @@ public class Health : MonoBehaviour
 
     public void Decrease()
     {
-        _decrease.Invoke();
+        _change.Invoke();
 
         if (_health < _minHealth)
         {

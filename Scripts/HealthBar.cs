@@ -10,25 +10,26 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private float _minHealth;
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
+    [SerializeField] private float _health = 100;
 
-    public void DisplayHealthBar(float _health)
+    public void Display()
     {
         _slider.value = _health;
 
         _textHealth.text = "Количество жизни = " + _health;
     }
 
-    public void Increase(float _health)
+    public void Increase()
     {
-        StartCoroutine(IncreaseHealth(_health));
+        StartCoroutine(IncreaseHealth());
     }
 
-    public void Decrease(float _health)
+    public void Decrease()
     {
-        StartCoroutine(DecreaseVolume(_health));
+        StartCoroutine(DecreaseVolume());
     }
 
-    public IEnumerator IncreaseHealth(float _health)
+    public IEnumerator IncreaseHealth()
     {
         var waitForOneSeconds = new WaitForSeconds(1f);
 
@@ -42,7 +43,7 @@ public class HealthBar : MonoBehaviour
         }
     }
 
-    public IEnumerator DecreaseVolume(float _health)
+    public IEnumerator DecreaseVolume()
     {
         var waitForOneSeconds = new WaitForSeconds(1f);
 
