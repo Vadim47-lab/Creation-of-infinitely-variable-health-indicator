@@ -10,55 +10,45 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private float _minHealth;
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
-    
+    [SerializeField] private GameObject _batman;
+
     private float _health;
 
     public void Start()
     {
-        GameObject batman = GameObject.Find("Batman");
-        _health = batman.GetComponent<float>();
+        _health = _batman.GetComponent<Health>()._health;
+
+        Increase();
+        Display();
+        Decrease();
     }
 
-    public void Display()
+    private void Display()
     {
         _slider.value = _health;
 
         _textHealth.text = "Количество жизни = " + _health;
     }
 
-    public void Increase()
+    private void Increase()
     {
-        StartCoroutine(IncreaseHealth());
+        StartCoroutine(ChangeHealth(_maxHealth));
     }
 
-    public void Decrease()
+    private void Decrease()
     {
-        StartCoroutine(DecreaseVolume());
+        StartCoroutine(ChangeHealth(_minHealth));
     }
 
-    public IEnumerator IncreaseHealth()
+    public IEnumerator ChangeHealth(float change)
     {
         var waitForOneSeconds = new WaitForSeconds(1f);
 
-        while (_health != _maxHealth)
+        while (_health != change)
         {
             _slider.value = _health;
 
-            _health = Mathf.MoveTowards(_health, _maxHealth, _health + _difference);
-
-            yield return waitForOneSeconds;
-        }
-    }
-
-    public IEnumerator DecreaseVolume()
-    {
-        var waitForOneSeconds = new WaitForSeconds(1f);
-
-        while (_health != _minHealth)
-        {
-            _slider.value = _health;
-
-            _health = Mathf.MoveTowards(_health, _minHealth, _health - _difference);
+            _health = Mathf.MoveTowards(_health, change, _health + _difference);
 
             yield return waitForOneSeconds;
         }

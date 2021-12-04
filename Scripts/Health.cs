@@ -6,13 +6,28 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private UnityEvent _change;
-    [SerializeField] private float _health = 100;
+    [SerializeField] private Button _icrease;
+    [SerializeField] private Button _decrease;
     [SerializeField] private float _minHealth;
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
 
-    public void Increase()
+    private readonly UnityAction _change;
+    public float _health = 100;
+
+    private void OnEnable()
+    {
+        _icrease.onClick.AddListener(Icrease);
+        _decrease.onClick.AddListener(Decrease);
+    }
+
+    private void OnDisable()
+    {
+        _icrease.onClick.RemoveListener(Icrease);
+        _decrease.onClick.RemoveListener(Decrease);
+    }
+
+    private void Icrease()
     {
         _change.Invoke();
 
@@ -22,7 +37,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void Decrease()
+    private void Decrease()
     {
         _change.Invoke();
 
