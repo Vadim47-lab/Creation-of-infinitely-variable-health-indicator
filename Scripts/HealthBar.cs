@@ -10,7 +10,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private float _minHealth;
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
-    [SerializeField] private GameObject _batman;
+    [SerializeField] private GameObject _batman = Health;
 
     private float _health;
 
