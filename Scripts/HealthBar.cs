@@ -44,7 +44,7 @@ public class HealthBar : MonoBehaviour
         {
             _slider.value = _health.HealthPlayer;
 
-            _health = Mathf.MoveTowards(_health, change, _health.HealthPlayer + _difference);
+            _health.HealthPlayer = Mathf.MoveTowards(_health.HealthPlayer, change, _health.HealthPlayer + _difference);
 
             yield return waitForOneSeconds;
         }

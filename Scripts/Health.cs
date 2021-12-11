@@ -14,7 +14,7 @@ public class Health : MonoBehaviour
     public Button icrease;
     public Button decrease;
 
-    public float HealthPlayer { get; private set; }
+    public float HealthPlayer { get; set; }
 
     private void Start()
     {
