@@ -19,21 +19,31 @@ public class HealthBar : MonoBehaviour
         Decrease();
     }
 
-    private void Display()
+    public void Display()
     {
         _slider.value = _health.HealthPlayer;
 
         _textHealth.text = "Количество жизни = " + _health.HealthPlayer;
     }
 
-    private void Increase()
+    public void Increase()
     {
         StartCoroutine(ChangeHealth(_maxHealth));
+
+        if (_health.HealthPlayer > _maxHealth)
+        {
+            _health.HealthPlayer = _maxHealth;
+        }
     }
 
-    private void Decrease()
+    public void Decrease()
     {
         StartCoroutine(ChangeHealth(_minHealth));
+
+        if (_health.HealthPlayer < _minHealth)
+        {
+            _health.HealthPlayer += _difference;
+        }
     }
 
     public IEnumerator ChangeHealth(float change)
