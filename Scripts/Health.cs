@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
 
-    public float _health = 100;
+    private float _health = 100;
 
     private void Start()
     {
