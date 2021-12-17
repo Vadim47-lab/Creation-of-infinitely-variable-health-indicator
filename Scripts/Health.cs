@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
 
-    private float _health = 100;
+    public float HealthPlayer { get; private set; }
 
     private void Start()
     {
@@ -27,9 +27,9 @@ public class Health : MonoBehaviour
 
         StartCoroutine(ChangeHealth(_maxHealth));
 
-        if (_health > _maxHealth)
+        if (HealthPlayer > _maxHealth)
         {
-            _health = _maxHealth;
+            HealthPlayer = _maxHealth;
         }
     }
 
@@ -39,9 +39,9 @@ public class Health : MonoBehaviour
 
         StartCoroutine(ChangeHealth(_minHealth));
 
-        if (_health < _minHealth)
+        if (HealthPlayer < _minHealth)
         {
-            _health += _difference;
+            HealthPlayer += _difference;
         }
     }
 
@@ -49,9 +49,9 @@ public class Health : MonoBehaviour
     {
         var waitForOneSeconds = new WaitForSeconds(1f);
 
-        while (_health != change)
+        while (HealthPlayer != change)
         {
-            _health = Mathf.MoveTowards(_health, change, _health + _difference);
+            HealthPlayer = Mathf.MoveTowards(HealthPlayer, change, HealthPlayer + _difference);
 
             yield return waitForOneSeconds;
         }
