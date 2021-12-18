@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     public UnityAction eventDisplay;
-    [SerializeField] private Button increase;
-    [SerializeField] private Button decrease;
+    [SerializeField] private Button _increase;
+    [SerializeField] private Button _decrease;
     [SerializeField] private float _minHealth;
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
