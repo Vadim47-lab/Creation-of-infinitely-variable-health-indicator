@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public UnityAction eventDisplay;
+    public UnityAction Change;
     [SerializeField] private Button _increase;
     [SerializeField] private Button _decrease;
+    [SerializeField] private HealthBar _healthBar;
     [SerializeField] private float _minHealth;
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
@@ -23,9 +24,9 @@ public class Health : MonoBehaviour
 
     public void Increase()
     {
-        eventDisplay();
+        Change?.Invoke();
 
-        StartCoroutine(ChangeHealth(_maxHealth));
+        StartCoroutine(_healthBar.ChangeHealth(_maxHealth));
 
         if (_health > _maxHealth)
         {
@@ -35,25 +36,13 @@ public class Health : MonoBehaviour
 
     public void Decrease()
     {
-        eventDisplay();
+        Change?.Invoke();
 
-        StartCoroutine(ChangeHealth(_minHealth));
+        StartCoroutine(_healthBar.ChangeHealth(_minHealth));
 
         if (_health < _minHealth)
         {
             _health += _difference;
-        }
-    }
-
-    private IEnumerator ChangeHealth(float change)
-    {
-        var waitForOneSeconds = new WaitForSeconds(1f);
-
-        while (_health != change)
-        {
-            _health = Mathf.MoveTowards(_health, change, _health + _difference);
-
-            yield return waitForOneSeconds;
         }
     }
 }
