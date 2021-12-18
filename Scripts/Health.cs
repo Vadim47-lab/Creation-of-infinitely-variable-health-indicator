@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public UnityAction Change;
     [SerializeField] private Button _increase;
     [SerializeField] private Button _decrease;
     [SerializeField] private HealthBar _healthBar;
@@ -15,16 +14,11 @@ public class Health : MonoBehaviour
     [SerializeField] private int _difference = 10;
 
     private float _health;
-
-    private void Start()
-    {
-        Increase();
-        Decrease();
-    }
+    public event UnityAction Changed;
 
     public void Increase()
     {
-        Change?.Invoke();
+        Changed?.Invoke();
 
         StartCoroutine(_healthBar.ChangeHealth(_maxHealth));
 
@@ -36,7 +30,7 @@ public class Health : MonoBehaviour
 
     public void Decrease()
     {
-        Change?.Invoke();
+        Changed?.Invoke();
 
         StartCoroutine(_healthBar.ChangeHealth(_minHealth));
 
