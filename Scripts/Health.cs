@@ -15,6 +15,12 @@ public class Health : MonoBehaviour
     private float _health;
     public event UnityAction Changed;
 
+    public event UnityAction Change
+    {
+        add => Changed.AddListener(value);
+        remove => Changed.AddListener(value);
+    }
+
     public void Increase()
     {
         Changed?.Invoke();
