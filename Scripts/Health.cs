@@ -20,8 +20,6 @@ public class Health : MonoBehaviour
     {
         Changed?.Invoke();
 
-        StartCoroutine(_healthBar.ChangeHealth(_maxHealth));
-
         if (_health > _maxHealth)
         {
             _health = _maxHealth;
@@ -31,8 +29,6 @@ public class Health : MonoBehaviour
     public void Decrease()
     {
         Changed?.Invoke();
-
-        StartCoroutine(_healthBar.ChangeHealth(_minHealth));
 
         if (_health < _minHealth)
         {
