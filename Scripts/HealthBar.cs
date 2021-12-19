@@ -17,14 +17,14 @@ public class HealthBar : MonoBehaviour
         Display();
     }
 
-    public void Increase()
+    private void Increase()
     {
         StartCoroutine(ChangeHealth(_maxHealth));
 
         Display();
     }
 
-    public void Decrease()
+    private void Decrease()
     {
         StartCoroutine(ChangeHealth(_minHealth));
 
@@ -38,7 +38,7 @@ public class HealthBar : MonoBehaviour
         _textHealth.text = "Количество жизни = " + _health._health;
     }
 
-    public IEnumerator ChangeHealth(float change)
+    private IEnumerator ChangeHealth(float change)
     {
         var waitForOneSeconds = new WaitForSeconds(1f);
 
