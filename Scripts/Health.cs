@@ -8,7 +8,6 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private Button _increase;
     [SerializeField] private Button _decrease;
-    [SerializeField] private HealthBar _healthBar;
     [SerializeField] private float _minHealth;
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
