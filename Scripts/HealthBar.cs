@@ -31,7 +31,7 @@ public class HealthBar : MonoBehaviour
         Display();
     }
 
-    public void Display()
+    private void Display()
     {
         _slider.value = _health._health;
 
