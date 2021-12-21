@@ -33,19 +33,5 @@ public class Health : MonoBehaviour
         {
             HealthPlayer -= _difference;
         }
-
-        StartCoroutine(ChangeHealth(HealthPlayer));
-    }
-
-    private IEnumerator ChangeHealth(float change)
-    {
-        var waitForOneSeconds = new WaitForSeconds(1f);
-
-        while (HealthPlayer != change)
-        {
-            HealthPlayer = Mathf.MoveTowards(HealthPlayer, change, HealthPlayer + _difference);
-
-            yield return waitForOneSeconds;
-        }
     }
 }
