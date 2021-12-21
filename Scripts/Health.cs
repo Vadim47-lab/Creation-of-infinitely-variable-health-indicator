@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
 
     public void Increase()
     {
-        HealthPlayer -= _difference;
+        HealthPlayer += _difference;
 
         Changed?.Invoke();
 
