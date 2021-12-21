@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
 
         if (HealthPlayer > _maxHealth)
         {
-            HealthPlayer = _maxHealth;
+            HealthPlayer += _maxHealth;
         }
     }
 
@@ -31,7 +31,7 @@ public class Health : MonoBehaviour
 
         if (HealthPlayer < _minHealth)
         {
-            HealthPlayer += _difference;
+            HealthPlayer -= _difference;
         }
 
         StartCoroutine(ChangeHealth(HealthPlayer));
