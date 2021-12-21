@@ -19,34 +19,18 @@ public class HealthBar : MonoBehaviour
 
     private void Increase()
     {
-        StartCoroutine(ChangeHealth(_maxHealth));
-
         Display();
     }
 
     private void Decrease()
     {
-        StartCoroutine(ChangeHealth(_minHealth));
-
         Display();
     }
 
     private void Display()
     {
-        _slider.value = _health._health;
+        _slider.value = _health.HealthPlayer;
 
-        _textHealth.text = "Количество жизни = " + _health._health;
-    }
-
-    private IEnumerator ChangeHealth(float change)
-    {
-        var waitForOneSeconds = new WaitForSeconds(1f);
-
-        while (_health._health != change)
-        {
-            _health._health = Mathf.MoveTowards(_health._health, change, _health._health + _difference);
-
-            yield return waitForOneSeconds;
-        }
+        _textHealth.text = "Количество жизни = " + _health.HealthPlayer;
     }
 }

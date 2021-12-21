@@ -12,16 +12,16 @@ public class Health : MonoBehaviour
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
 
-    private float _health;
+    public float HealthPlayer { get; private set; }
     public event UnityAction Changed;
 
     public void Increase()
     {
         Changed?.Invoke();
 
-        if (_health > _maxHealth)
+        if (HealthPlayer > _maxHealth)
         {
-            _health = _maxHealth;
+            HealthPlayer = _maxHealth;
         }
     }
 
@@ -29,9 +29,23 @@ public class Health : MonoBehaviour
     {
         Changed?.Invoke();
 
-        if (_health < _minHealth)
+        if (HealthPlayer < _minHealth)
         {
-            _health += _difference;
+            HealthPlayer += _difference;
+        }
+
+        StartCoroutine(ChangeHealth(HealthPlayer));
+    }
+
+    private IEnumerator ChangeHealth(float change)
+    {
+        var waitForOneSeconds = new WaitForSeconds(1f);
+
+        while (HealthPlayer != change)
+        {
+            HealthPlayer = Mathf.MoveTowards(HealthPlayer, change, HealthPlayer + _difference);
+
+            yield return waitForOneSeconds;
         }
     }
 }
