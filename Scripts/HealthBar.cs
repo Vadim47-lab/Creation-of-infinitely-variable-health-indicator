@@ -19,6 +19,8 @@ public class HealthBar : MonoBehaviour
 
     public void Increase()
     {
+        _health.Changed += Increase;
+
         Display();
 
         StartCoroutine(ChangeHealth(_maxHealth));
@@ -26,6 +28,8 @@ public class HealthBar : MonoBehaviour
 
     public void Decrease()
     {
+        _health.Changed += Decrease;
+
         Display();
 
         StartCoroutine(ChangeHealth(_minHealth));
