@@ -17,22 +17,38 @@ public class HealthBar : MonoBehaviour
         Display();
     }
 
-    public void Increase()
+    private void OnEnable()
     {
         _health.Changed += Increase;
+        _health.Changed += Decrease;
+    }
+
+    private void OnDisable()
+    {
+        _health.Changed -= Increase;
+        _health.Changed -= Decrease;
+    }
+
+    public void Increase()
+    {
+        OnEnable();
 
         Display();
 
         StartCoroutine(ChangeHealth(_maxHealth));
+
+        OnDisable();
     }
 
     public void Decrease()
     {
-        _health.Changed += Decrease;
+        OnEnable();
 
         Display();
 
         StartCoroutine(ChangeHealth(_minHealth));
+
+        OnDisable();
     }
 
     private void Display()
