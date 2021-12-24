@@ -12,12 +12,16 @@ public class Health : MonoBehaviour
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference = 10;
 
-    public float HealthPlayer { get; private set; }
+    private readonly HealthBar _healthBar;
     public event UnityAction Changed;
+
+    public float HealthPlayer { get; private set; }
 
     public void Increase()
     {
         HealthPlayer += _difference;
+
+        Changed += _healthBar.Increase;
 
         Changed?.Invoke();
 
@@ -30,6 +34,8 @@ public class Health : MonoBehaviour
     public void Decrease()
     {
         HealthPlayer -= _difference;
+
+        Changed += _healthBar.Decrease;
 
         Changed?.Invoke();
 

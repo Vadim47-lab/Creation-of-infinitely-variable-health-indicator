@@ -17,14 +17,14 @@ public class HealthBar : MonoBehaviour
         Display();
     }
 
-    private void Increase()
+    public void Increase()
     {
         Display();
 
         StartCoroutine(ChangeHealth(_maxHealth));
     }
 
-    private void Decrease()
+    public void Decrease()
     {
         Display();
 
