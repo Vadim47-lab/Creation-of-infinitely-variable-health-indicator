@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
     {
         HealthPlayer += _difference;
 
-        Changed += _healthBar.Increase;
+        _healthBar.Increase += Changed;
 
         Changed?.Invoke();
 
@@ -35,7 +35,7 @@ public class Health : MonoBehaviour
     {
         HealthPlayer -= _difference;
 
-        Changed += _healthBar.Decrease;
+        _healthBar.Decrease += Changed;
 
         Changed?.Invoke();
 
