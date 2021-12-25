@@ -12,6 +12,9 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private float _maxHealth;
     [SerializeField] private int _difference;
 
+    private Coroutine _coroutineIncreaseHealth;
+    private Coroutine _coroutineDecreaseHealth;
+
     private void Start()
     {
         Display();
@@ -31,14 +34,18 @@ public class HealthBar : MonoBehaviour
 
     private void Increase()
     {
-        StartCoroutine(ChangeHealth(_maxHealth));
+        StopCoroutine(_coroutineDecreaseHealth);
+
+        _coroutineIncreaseHealth = StartCoroutine(ChangeHealth(_maxHealth));
 
         Display();
     }
 
     private void Decrease()
     {
-        StartCoroutine(ChangeHealth(_minHealth));
+        StopCoroutine(_coroutineIncreaseHealth);
+
+        _coroutineDecreaseHealth = StartCoroutine(ChangeHealth(_minHealth));
 
         Display();
     }
