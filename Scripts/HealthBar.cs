@@ -43,8 +43,6 @@ public class HealthBar : MonoBehaviour
     {
         _slider.value = _health.HealthPlayer;
 
-        Debug.Log("Display + " +_slider.value);
-
         _textHealth.text = "Количество жизни = " + _health.HealthPlayer;
     }
 
@@ -57,8 +55,6 @@ public class HealthBar : MonoBehaviour
             _slider.value = Mathf.MoveTowards(_health.HealthPlayer, change, _health.HealthPlayer + _difference);
 
             Display();
-
-            Debug.Log("ChangeHealth + " + _slider.value);
 
             yield return waitForOneSeconds;
         }
