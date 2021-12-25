@@ -10,7 +10,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Health _health;
     [SerializeField] private float _minHealth;
     [SerializeField] private float _maxHealth;
-    [SerializeField] private int _difference = 10;
+    [SerializeField] private int _difference;
 
     private void Start()
     {
@@ -52,7 +52,7 @@ public class HealthBar : MonoBehaviour
 
     private IEnumerator ChangeHealth(float change)
     {
-        var waitForOneSeconds = new WaitForSeconds(1f);
+        var waitForOneSeconds = new WaitForSeconds(0.1f);
 
         while (_health.HealthPlayer != change)
         {
