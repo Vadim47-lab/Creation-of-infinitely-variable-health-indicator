@@ -14,33 +14,27 @@ public class Health : MonoBehaviour
 
     public event UnityAction Changed;
 
-    public float HealthPlayer { get; private set; }
+    public float Value { get; private set; }
 
     private void Start()
     {
-        HealthPlayer = _maxHealth;
+        Value = _maxHealth;
     }
 
     public void Increase()
     {
-        HealthPlayer += _difference;
+        Value += _difference;
 
-        if (HealthPlayer > _maxHealth)
-        {
-            HealthPlayer = _maxHealth;
-        }
+        Value = Mathf.Clamp(Value, _minHealth, _maxHealth);
 
         Changed?.Invoke();
     }
 
     public void Decrease()
     {
-        HealthPlayer -= _difference;
+        Value -= _difference;
 
-        if (HealthPlayer < _minHealth)
-        {
-            HealthPlayer = _minHealth;
-        }
+        Value = Mathf.Clamp(Value, _minHealth, _maxHealth);
 
         Changed?.Invoke();
     }
