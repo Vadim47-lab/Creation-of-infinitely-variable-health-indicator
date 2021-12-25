@@ -47,11 +47,7 @@ public class HealthBar : MonoBehaviour
     {
         _slider.value = _health.HealthPlayer;
 
-        Debug.Log(_slider.value);
-
         _textHealth.text = "Количество жизни = " + _health.HealthPlayer;
-
-        Debug.Log(_textHealth.text);
     }
 
     private IEnumerator ChangeHealth(float change)
