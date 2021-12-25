@@ -31,23 +31,27 @@ public class HealthBar : MonoBehaviour
 
     public void Increase()
     {
-        Display();
-
         StartCoroutine(ChangeHealth(_maxHealth));
+
+        Display();
     }
 
     public void Decrease()
     {
-        Display();
-
         StartCoroutine(ChangeHealth(_minHealth));
+
+        Display();
     }
 
     private void Display()
     {
         _slider.value = _health.HealthPlayer;
 
+        Debug.Log(_slider.value);
+
         _textHealth.text = "Количество жизни = " + _health.HealthPlayer;
+
+        Debug.Log(_textHealth.text);
     }
 
     private IEnumerator ChangeHealth(float change)
