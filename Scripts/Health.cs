@@ -20,23 +20,23 @@ public class Health : MonoBehaviour
     {
         HealthPlayer += _difference;
 
-        Changed?.Invoke();
-
         if (HealthPlayer > _maxHealth)
         {
             HealthPlayer = _maxHealth;
         }
+
+        Changed?.Invoke();
     }
 
     public void Decrease()
     {
         HealthPlayer -= _difference;
 
-        Changed?.Invoke();
-
         if (HealthPlayer < _minHealth)
         {
             HealthPlayer = _minHealth;
         }
+
+        Changed?.Invoke();
     }
 }

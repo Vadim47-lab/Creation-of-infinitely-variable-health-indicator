@@ -34,8 +34,6 @@ public class HealthBar : MonoBehaviour
         Display();
 
         StartCoroutine(ChangeHealth(_maxHealth));
-
-        OnDisable();
     }
 
     public void Decrease()
@@ -43,8 +41,6 @@ public class HealthBar : MonoBehaviour
         Display();
 
         StartCoroutine(ChangeHealth(_minHealth));
-
-        OnDisable();
     }
 
     private void Display()
